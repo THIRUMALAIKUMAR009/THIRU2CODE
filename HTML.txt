@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Animated Panda Login Page by untoldcoding</title>
+</head>
+<body>
+    <div class="panda">
+        <div class="ear"></div>
+        <div class="face">
+            <div class="eye"></div>
+            <div class="eye"></div>
+            <div class="nose"></div>
+        </div>
+    </div>
+
+    <form>
+        <input required="required" class="form-control" />
+        <label class="form-label">Username untoldcoding</label>
+
+        <input required="required" class="form-control" />
+        <label class="form-label">Password</label>
+
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
