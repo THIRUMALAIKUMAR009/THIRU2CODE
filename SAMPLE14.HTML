@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .clock {
+            --clock-size: 360px;
+            width: var(--clock-size);
+            height: var(--clock-size);
+            position: fixed;
+        }
+
+        .spike {
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            border-radius: 50%;
+            width: 8px;
+            height: 1px;
+            background: #fff9;
+            line-height: 20px;
+            transform-origin: 50%;
+            z-index: 5;
+            transform: rotate(var(--rotate));
+        }
+
+        .spike:nth-child(5n+1) {
+            box-shadow: -7px 0 #fff9;
+        }
+    </style>
+</head>
+
+<body>
+    <second class="clock">
+        <!-- Analog Clock -->
+        <div class="seconds"></div>
+        <div class="minutes"></div>
+        <div class="minute">44</div>
+        <div class="hour"></div>
+    </second>
+
+    <script>
+        let clock = document.querySelector('.clock');
+        let hours = clock.querySelector('.hour');
+        let minutes = clock.querySelector('.minute');
+        let seconds = clock.querySelector('.seconds');
+
+        let updateTime = () => {
+            let time = new Date();
+            let h = time.getHours();
+            let m = time.getMinutes();
+            let s = time.getSeconds();
+            h %= 12;
+            hours.style.transform = `rotate(${(h / 12) * 360 + (m / 60) * 30}deg)`;
+            minutes.style.transform = `rotate(${(m / 60) * 360 + (s / 60) * 6}deg)`;
+            seconds.style.transform = `rotate(${(s / 60) * 360}deg)`;
+            requestAnimationFrame(updateTime);
+        };
+
+        updateTime();
+    </script>
+</body>
+
+</html>
