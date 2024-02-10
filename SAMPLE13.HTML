@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vo WiFi Search Bar</title>
+    <style>
+        html, body {
+            font-family: Raleway, sans-serif;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: nowrap;
+            overflow: hidden;
+        }
+
+        form.search-box {
+            font-size: 20px;
+            border: solid 0.3em;
+            display: inline-block;
+            position: relative;
+            border-radius: 2.5em;
+        }
+
+        form.search-box input[type="text"] {
+            font-family: inherit;
+            font-weight: bold;
+            width: 22em;
+            height: 2.5em;
+            padding: 0.3em 2.1em 0.4em;
+            border: none;
+            box-sizing: border-box;
+            border-radius: 2.5em;
+        }
+
+        form.search-box button {
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 2.5em;
+            color: #777;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <form class="search-box">
+        <input type="text" placeholder="">
+        <button type="reset"><i class="fa fa-times"></i></button>
+    </form>
+
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+</body>
+</html>
