@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>2much_tech Card Effect | Swiper</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <section>
+    <div class="content">
+      <div class="info">
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <p>
+                Join us for a fantastic movie night filled with popcorn, laughter, and great company! Whether you're a fan of thrilling action, heartwarming dramas, or tickling comedies, we've got a film lineup to cater to all tastes. Save the date, 35 Send gift, Follow.
+              </p>
+              <button class="btn">Join</button>
+            </div>
+            <div class="swiper-slide">
+              <span>8.5</span>
+              <h2>The Queen's Gambit</h2>
+              Don't miss out on...
+            </div>
+            <div class="swiper-slide">
+              <h2>Breaking Bad</h2>
+              Followed by hopeui.io
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.mySwiper', {
+      loop: true,
+      autoplay: {
+        delay: 5000,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
+  </script>
+</body>
+</html>
