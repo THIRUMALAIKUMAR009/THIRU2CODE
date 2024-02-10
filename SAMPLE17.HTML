@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+        }
+    </style>
+    <title>Password Toggle</title>
+</head>
+<body>
+    <div class="container">
+        <label for="pwd">Password:</label>
+        <input type="password" id="pwd" name="pwd">
+        <input type="checkbox" id="togglePwd" name="togglePwd"> Show Password
+    </div>
+    <script>
+        const togglePwd = document.getElementById("togglePwd");
+        const pwd = document.getElementById("pwd");
+
+        togglePwd.addEventListener("change", function() {
+            pwd.type = this.checked ? "text" : "password";
+        });
+    </script>
+</body>
+</html>
