@@ -1,0 +1,32 @@
+import pandas as pd
+
+def analyze_demographic_data(data):
+    df = pd.read_csv('demographic_data.csv')
+    race_counts = df['race'].value_counts()
+    average_age_of_men = df[df['sex'] == 'Male']['age'].mean()
+
+    bachelors_percentage = (df['education'] == 'Bachelors').mean() * 100
+    advanced_education_percentage = ((df['education'].isin(['Bachelors', 'Masters', 'Doctorate'])) & (df['salary'] == '>50K')).mean() * 100
+    no_advanced_education_percentage = (~df['education'].isin(['Bachelors', 'Masters', 'Doctorate'])) & (df['salary'] == '>50K')).mean() * 100
+
+    min_hours_per_week = df['hours-per-week'].min()
+
+    min_hours_percentage = (df['hours-per-week'] == min_hours_per_week) & (df['salary'] == '>50K').mean() * 100
+
+    highest_percentage_country = df[df['salary'] == '>50K']['native-country'].value_counts(normalize=True).idxmax()
+    highest_percentage = df[df['salary'] == '>50K']['native-country'].value_counts(normalize=True).max() * 100
+
+    most_popular_occupation_india = df[df['native-country'] == 'India'][df['salary'] == '>50K']['occupation'].value_counts().idxmax()
+
+    return race_counts, average_age_of_men, bachelors_percentage, advanced_education_percentage, no_advanced_education_percentage, min_hours_per_week, min_hours_percentage, highest_percentage_country, highest_percentage, most_popular_occupation_india
+
+race_counts, average_age_of_men, bachelors_percentage, advanced_education_percentage, no_advanced_education_percentage, min_hours_per_week, min_hours_percentage, highest_percentage_country, highest_percentage, most_popular_occupation_india = analyze_demographic_data(None)
+
+print("Race counts:")
+print(race_counts)
+print("\nAverage age of men:", round(average_age_of_men, 1))
+print("\nPercentage of people with a Bachelor's degree:", round(bachelors_percentage, 1))
+print("\nPercentage of people with advanced education who make more than 50K:", round(advanced_education_percentage, 1))
+print("\nPercentage of people without advanced education who make more than 50K:", round(no_advanced_education_percentage, 1))
+print("\nMinimum number of hours a person works per week:", min_hours_per_week)
+print("\nPercentage of people who work the minimum number of hours per week and have a salary of more than 50K:
