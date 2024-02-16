@@ -1,0 +1,9 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy.stats
+data = pd.read_csv('epa-sea-level.csv')
+plt.scatter(data['Year'], data['CSIRO Adjusted Sea Level'])
+slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(data['Year'], data['CSIRO Adjusted Sea Level'])
+plt.plot(data['Year'], intercept + slope * data['Year'], color='red')
+data_2000_onwards = data[data['Year'] >= 2000]
+slope_2000, intercept_200
