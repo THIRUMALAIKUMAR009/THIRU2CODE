@@ -1,0 +1,52 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import copy
+data = pd.read_csv('fcc-forum-pageviews.csv')
+data.set_index('date', inplace=True)
+data = data[~((data < data.quantile(0.975)) & (data > data.quantile(0.025))).any(axis=1)]
+
+def draw_line_plot(data):
+    data_copy = data.copy()
+    plt.figure(figsize=(12, 6))
+    plt.plot(data_copy.index, data_copy['value'])
+    plt.title('Daily freeCodeCamp Forum Page Views 5/2016-12/2019')
+    plt.xlabel('Date')
+    plt.ylabel('Page Views')
+    plt.savefig('line_plot.png')
+    plt.show()
+
+def draw_bar_plot(data):
+    data_copy = data.copy()
+    
+    plt.figure(figsize=(12, 6))
+    sns.barplot(x=data_copy.index.year, y=data_copy.groupby(data_copy.index.year)['value'].mean(), ax=plt.gca())
+    plt.title('Average Daily Page Views')
+    plt.xlabel('Years')
+    plt.ylabel('Average Page Views')
+    plt.legend(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+    plt.savefig('bar_plot.png')
+    plt.show()
+
+def draw_box_plot(data):
+    # Create a copy of the data frame
+    data_copy = data.copy()
+
+    data_copy['year'] = data_copy.index.year
+    data_copy['month'] = data_copy.index.month
+    data_copy = data_copy.melt(id_vars=['year', 'month'], var_name='date', value_name='page_views')
+
+    plt.figure(figsize=(12, 6))
+    sns.boxplot(x='year', y='page_views', data=data_copy)
+    plt.title('Year-wise Box Plot (Trend)')
+    plt.xlabel('Years')
+    plt.ylabel('Page Views')
+    plt.savefig('box_plot_year.png')
+
+    plt.figure(figsize=(12, 6))
+    sns.boxplot(x='month', y='page_views', data=data_copy)
+    plt.title('Month-wise Box Plot (Seasonality)')
+    plt.xlabel('Months')
+    plt.ylabel('Page Views')
+    plt.xticks(range(1, 13), ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+    plt.savefig('box_plot_month.png')
