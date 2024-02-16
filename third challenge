@@ -1,0 +1,57 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+def load_data(data):
+    # Load the data
+    data = pd.read_csv('medical_examination.csv')
+
+    # Add a column for overweight
+    data['overweight'] = (data['weight'] / ((data['height'] / 100) ** 2) > 25).astype(int)
+
+    # Normalize the data
+    data['cholesterol'] = (data['cholesterol'] > 1).astype(int)
+    data['gluc'] = (data['gluc'] > 1).astype(int)
+    data['alco'] = data['alco'].apply(lambda x: int(x != '0'))
+    data['active'] = data['active'].apply(lambda x: int(x == '1'))
+    data['cardio'] = data['cardio'].apply(lambda x: int(x == '1'))
+
+    return data
+
+def display_counts(data):
+    # Create a figure
+    fig, axes = plt.subplots(1, 2, figsize=(16, 6))
+
+    # Plot the counts for patients with cardio = 0
+    sns.countplot(x='cholesterol', hue='cardio', data=data[data['cardio'] == 0], ax=axes[0])
+    sns.countplot(x='gluc', hue='cardio', data=data[data['cardio'] == 0], ax=axes[0])
+    sns.countplot(x='alco', hue='cardio', data=data[data['cardio'] == 0], ax=axes[1])
+    sns.countplot(x='active', hue='cardio', data=data[data['cardio'] == 0], ax=axes[1])
+    sns.countplot(x='smoke', hue='cardio', data=data[data['cardio'] == 0], ax=axes[1])
+
+    # Plot the counts for patients with cardio = 1
+    sns.countplot(x='cholesterol', hue='cardio', data=data[data['cardio'] == 1], ax=axes[0])
+    sns.countplot(x='gluc', hue='cardio', data=data[data['cardio'] == 1], ax=axes[0])
+    sns.countplot(x='alco', hue='cardio', data=data[data['cardio'] == 1], ax=axes[1])
+    sns.countplot(x='active', hue='cardio', data=data[data['cardio'] == 1], ax=axes[1])
+    sns.countplot(x='smoke', hue='cardio', data=data[data['cardio'] == 1], ax=axes[1])
+
+    plt.tight_layout()
+    plt.show()
+
+def display_categorical_counts(data):
+    # Create a figure
+    fig, axes = plt.subplots(2, 3, figsize=(16, 12))
+
+    # Plot the counts for each category
+    sns.countplot(x='gender', hue='cardio', data=data, ax=axes[0, 0])
+    sns.countplot(x='cholesterol', hue='cardio', data=data, ax=axes[0, 1])
+    sns.countplot(x='gluc', hue='cardio', data=data, ax=axes[0, 2])
+    sns.countplot(x='smoke', hue='cardio', data=data, ax=axes[1, 0])
+    sns.countplot(x='alco', hue='cardio', data=data, ax=axes[1, 1])
+    sns.countplot(x='active', hue='cardio', data=data, ax=axes[1, 2])
+
+    plt.tight_layout()
+    plt.show()
+
+def clean_data(data)
